@@ -35,6 +35,7 @@ const PLATFORMS: readonly Platform[] = [
   { label: "Windows", group: 0, fill: "M3 3h8.5v8.5H3zM12.5 3H21v8.5h-8.5zM3 12.5h8.5V21H3zM12.5 12.5H21V21h-8.5z" },
   { label: "Linux", group: 0, fill: BRAND.linux },
   { label: "WSL", group: 0, stroke: ["M4 4h16v16H4z", "m8 10 2 2-2 2", "M12 15h4"] },
+  { label: "Desktop", group: 1, stroke: ["M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z", "M8 21h8", "M12 17v4"] },
   { label: "TUI", group: 1, stroke: ["M3 5h18v14H3z", "m7 10 2 2-2 2", "M11 14h5"] },
   { label: "CI", group: 1, stroke: ["M6 3v12", "M21 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z", "M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0z", "M18 9a9 9 0 0 1-9 9"] },
   { label: "iOS", group: 2, fill: BRAND.ios },
