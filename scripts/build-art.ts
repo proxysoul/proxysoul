@@ -27,18 +27,44 @@ function floater(frame: string, x: number, y: number, size: number, delay: numbe
   return `<g style="animation:bob 5s ease-in-out ${delay}s infinite"><image href="${mote(frame)}" x="${x}" y="${y}" width="${size}" height="${size}" transform="rotate(${tilt} ${x + size / 2} ${y + size / 2})"/></g>`;
 }
 
+type Platform = { label: string; group: number; fill?: string; stroke?: readonly string[] };
+
+const BRAND: Record<string, string> = JSON.parse(readFileSync(new URL("../art/platforms.json", import.meta.url), "utf8"));
+const PLATFORMS: readonly Platform[] = [
+  { label: "macOS", group: 0, fill: BRAND.apple },
+  { label: "Windows", group: 0, fill: "M3 3h8.5v8.5H3zM12.5 3H21v8.5h-8.5zM3 12.5h8.5V21H3zM12.5 12.5H21V21h-8.5z" },
+  { label: "Linux", group: 0, fill: BRAND.linux },
+  { label: "WSL", group: 0, stroke: ["M4 4h16v16H4z", "m8 10 2 2-2 2", "M12 15h4"] },
+  { label: "TUI", group: 1, stroke: ["M3 5h18v14H3z", "m7 10 2 2-2 2", "M11 14h5"] },
+  { label: "CI", group: 1, stroke: ["M6 3v12", "M21 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z", "M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0z", "M18 9a9 9 0 0 1-9 9"] },
+  { label: "iOS", group: 2, fill: BRAND.ios },
+  { label: "Android", group: 2, fill: BRAND.android },
+  { label: "Watch", group: 2, stroke: ["M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z", "M12 10v2l1 1", "m16.1 7.7-.8-4a2 2 0 0 0-2-1.7h-2.6a2 2 0 0 0-2 1.6l-.8 4.1", "m7.9 16.4.8 4a2 2 0 0 0 2 1.6h2.7a2 2 0 0 0 2-1.6l.8-4"] },
+  { label: "Tablet", group: 2, stroke: ["M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z", "M12 18h.01"] },
+];
+
+function platformRow(t: Theme, x0: number, y: number): string {
+  const size = 40;
+  const step = 56;
+  let x = x0;
+  let group = 0;
+  return PLATFORMS.map((p) => {
+    if (p.group !== group) {
+      x += 18;
+      group = p.group;
+    }
+    const icon = p.fill
+      ? `<path d="${p.fill}" fill="${t.fg}"/>`
+      : (p.stroke ?? []).map((d) => `<path d="${d}" fill="none" stroke="${t.fg}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>`).join("");
+    const g = `<g transform="translate(${x} ${y})"><rect width="${size}" height="${size}" rx="12" fill="${t.a}" fill-opacity="0.09" stroke="${t.a}" stroke-opacity="0.35"/><g transform="translate(10 10) scale(0.8333)">${icon}</g><text x="${size / 2}" y="${size + 17}" text-anchor="middle" font-family="${MONO}" font-size="11.5" fill="${t.dim}">${p.label}</text><title>${p.label}</title></g>`;
+    x += step;
+    return g;
+  }).join("");
+}
+
 function hero(t: Theme): string {
-  const chips = ["desktop", "terminal", "headless CI", "iPhone"];
-  let cx = 470;
-  const chipSvg = chips
-    .map((label) => {
-      const w = label.length * 9.4 + 30;
-      const g = `<rect x="${cx}" y="292" width="${w}" height="34" rx="17" fill="${t.a}" fill-opacity="0.09" stroke="${t.a}" stroke-opacity="0.4"/><text x="${cx + w / 2}" y="314" text-anchor="middle" font-family="${MONO}" font-size="15" fill="${t.fg}">${label}</text>`;
-      cx += w + 10;
-      return g;
-    })
-    .join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-label="Mote looks around. Ouail Bni, ProxySoul. I build Empryo.">
+  const chipSvg = platformRow(t, 472, 286);
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-label="Mote looks around. Ouail Bni, ProxySoul. I build Empryo. It runs on macOS, Windows, Linux and WSL, in the terminal and CI, and on iOS, Android, watches and tablets.">
 <defs>
 <radialGradient id="ga" cx="0.17" cy="0.5" r="0.5"><stop offset="0" stop-color="${t.a}" stop-opacity="0.32"/><stop offset="1" stop-color="${t.a}" stop-opacity="0"/></radialGradient>
 <radialGradient id="gs" cx="0.95" cy="0" r="0.6"><stop offset="0" stop-color="${t.s}" stop-opacity="0.28"/><stop offset="1" stop-color="${t.s}" stop-opacity="0"/></radialGradient>
@@ -62,7 +88,7 @@ function hero(t: Theme): string {
 ${flipbook("look", LOOK, 48, 70, 260, 7.2)}
 ${floater("r_1", 1130, 34, 96, 0, 12)}
 ${floater("r_4", 1170, 270, 78, 1.2, -8)}
-${floater("pixel_4", 1010, 312, 90, 2.4, -12)}
+${floater("pixel_4", 1160, 150, 76, 2.4, -12)}
 </g>
 <rect x="0.5" y="0.5" width="1279" height="399" rx="27.5" fill="none" stroke="${t.line}"/>
 <text x="472" y="110" font-family="${MONO}" font-size="16" letter-spacing="4" fill="${t.a}">PROXYSOUL · SWEDEN</text>
@@ -86,7 +112,7 @@ const NODES: readonly Node[] = [
   { id: "tools.ts", x: 150, y: 190, r: 7, tone: "a" },
   { id: "desktop", x: 1130, y: 180, r: 7, tone: "s" },
   { id: "tui", x: 1150, y: 330, r: 6, tone: "s" },
-  { id: "iphone", x: 1100, y: 60, r: 6, tone: "s" },
+  { id: "phone", x: 1100, y: 60, r: 6, tone: "s" },
   { id: "pagerank", x: 210, y: 60, r: 6, tone: "m" },
   { id: "co-change", x: 150, y: 360, r: 6, tone: "m" },
 ];
@@ -94,7 +120,7 @@ const NODES: readonly Node[] = [
 const EDGES: readonly [string, string][] = [
   ["engine.ts", "genome.ts"], ["engine.ts", "ast-edit.ts"], ["engine.ts", "lsp.ts"], ["engine.ts", "memory.ts"], ["engine.ts", "compaction.ts"], ["engine.ts", "router.ts"],
   ["genome.ts", "pagerank"], ["genome.ts", "co-change"], ["genome.ts", "tools.ts"], ["ast-edit.ts", "lsp.ts"], ["ast-edit.ts", "tools.ts"], ["compaction.ts", "memory.ts"],
-  ["engine.ts", "desktop"], ["engine.ts", "tui"], ["engine.ts", "iphone"], ["router.ts", "compaction.ts"], ["co-change", "ast-edit.ts"],
+  ["engine.ts", "desktop"], ["engine.ts", "tui"], ["engine.ts", "phone"], ["router.ts", "compaction.ts"], ["co-change", "ast-edit.ts"],
 ];
 
 function genome(t: Theme): string {

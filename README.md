@@ -1,4 +1,4 @@
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg"><img alt="Mote, the Empryo mascot, looking around. Ouail Bni, ProxySoul. I build Empryo, the AI coding harness I wanted to use." src="assets/hero-light.svg" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg"><img alt="Mote, the Empryo mascot, looking around. Ouail Bni, ProxySoul. I build Empryo, the AI coding harness I wanted to use. It runs on macOS, Windows, Linux and WSL, in the terminal and CI, and on iOS, Android, watches and tablets." src="assets/hero-light.svg" width="100%"></picture>
 
 <div align="center">
 
@@ -11,7 +11,7 @@
 
 </div>
 
-Tech lead at Axis Communications in Sweden by day, [Empryo](https://empryo.com) by night. One engine behind the desktop app, the terminal, headless CI and your iPhone. It maps your repo, edits code by symbol and runs your checks, with any model or the plan you already pay for.
+Tech lead at Axis Communications in Sweden by day, [Empryo](https://empryo.com) by night. One engine behind the desktop app, the terminal and headless CI, on macOS, Windows, Linux and WSL, with your phone, tablet and watch as the remote. It maps your repo, edits code by symbol and runs your checks, with any model or the plan you already pay for.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/genome-dark.svg"><img alt="The Genome: Empryo maps your repo into a graph of files, symbols and git co-change before you type. Mote sits in the middle and watches the pulses." src="assets/genome-light.svg" width="100%"></picture>
 
