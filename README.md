@@ -26,24 +26,7 @@ Tech lead at Axis Communications in Sweden by day, [Empryo](https://empryo.com) 
 <img src="https://github-readme-stats-rouge-ten-64.vercel.app/api/top-langs/?username=proxysoul&layout=compact&hide_border=true&bg_color=00000000&title_color=1eb4e0&text_color=888888&langs_count=8" height="165" alt="Top languages for proxysoul">
 </div>
 
-<details>
-<summary><b>Toolbox</b></summary>
-<br>
-
-M.Sc. in Computer Science, Malmö University. 6+ years full-stack.
-
-| | |
-|---|---|
-| **Daily** | TypeScript · Bun · React / Next.js · Node · Vercel AI SDK · Electron · Cloudflare · PostgreSQL · Neovim |
-| **Languages** | TypeScript · JavaScript · C# · C++ · Kotlin · PHP · GraphQL |
-| **Frontend** | React · Next.js · TanStack Start · Tailwind · Framer Motion |
-| **Backend** | Node.js · Hono · Express · PostgreSQL · MongoDB · Prisma · Drizzle · Stripe |
-| **AI** | Vercel AI SDK · Anthropic Claude · OpenAI · MCP SDK |
-| **Cloud** | Cloudflare · AWS · Vercel · Docker · GitHub Actions |
-| **Mobile / Games** | React Native · Expo · Unity (C#) · Unreal (C++) |
-| **Setup** | Neovim · kitty · yabai + skhd · [dotfiles](https://github.com/Pouiiro/PouiiT-Files) |
-
-</details>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"><img alt="My stack: TypeScript, Bun, React, Next.js, Tailwind CSS, Node.js, Hono, Electron, Cloudflare, PostgreSQL, GraphQL, Docker, Neovim, Figma, Kotlin, Unity. Mote hops across and squashes each tile." src="assets/stack-light.svg" width="100%"></picture>
 
 <div align="center">
 <br>
