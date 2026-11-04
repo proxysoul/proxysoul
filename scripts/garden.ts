@@ -46,7 +46,7 @@ function garden(t: Theme, cal: Calendar): string {
           const row = new Date(`${day.date}T00:00:00Z`).getUTCDay();
           const l = level(day.contributionCount, peak);
           const fill = l < 0 ? t.empty : t.scale[l];
-          return `<rect x="${left + wi * (cell + gap)}" y="${top + row * (cell + gap)}" width="${cell}" height="${cell}" rx="5" fill="${fill}" style="animation:grow .6s ease-out ${(wi * 0.035).toFixed(3)}s both"><title>${day.contributionCount} on ${day.date}</title></rect>`;
+          return `<rect x="${left + wi * (cell + gap)}" y="${top + row * (cell + gap)}" width="${cell}" height="${cell}" rx="5" fill="${fill}"><title>${day.contributionCount} on ${day.date}</title></rect>`;
         })
         .join(""),
     )
@@ -60,12 +60,10 @@ function garden(t: Theme, cal: Calendar): string {
   const flip = frames.map((f, i) => `<image href="${mote(f)}" width="70" height="70" style="opacity:0;animation:flip 2.4s steps(1,end) infinite;animation-delay:${(-2.4 + i * (2.4 / frames.length)).toFixed(2)}s"/>`).join("");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${cal.totalContributions} GitHub contributions in the last year, with Mote walking across them.">
 <style>
-@keyframes grow{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
 @keyframes flip{0%{opacity:1}${step.toFixed(3)}%{opacity:0}100%{opacity:0}}
 @keyframes walk{from{transform:translate(${left}px,${ground}px)}to{transform:translate(${left + walk}px,${ground}px)}}
-rect{transform-box:fill-box;transform-origin:center}
 </style>
-<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="22" fill="${t.panel}" stroke="${t.line}" style="animation:none"/>
+<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="22" fill="${t.panel}" stroke="${t.line}"/>
 <text x="${left}" y="48" font-family="${MONO}" font-size="14" letter-spacing="3" fill="${t.a}">MOTE'S GARDEN</text>
 <text x="${left}" y="74" font-family="${FONT}" font-size="20" font-weight="700" fill="${t.fg}">${cal.totalContributions.toLocaleString("en-US")} contributions in the last year</text>
 <g style="animation:walk 36s linear infinite">${flip}</g>
